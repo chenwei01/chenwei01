@@ -188,6 +188,24 @@
         </div>
     </div>
 
+    <!-- 确认购买模态框 -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideCheckout()">&times;</span>
+            <h2>确认购买</h2>
+            <div id="checkout-details">
+                <!-- 购买详情将通过JavaScript动态生成 -->
+            </div>
+            <div class="checkout-total">
+                <strong>总金额: ¥<span id="checkout-total-amount">0</span></strong>
+            </div>
+            <div class="checkout-actions">
+                <button class="cancel-btn" onclick="hideCheckout()">取消</button>
+                <button class="confirm-btn" onclick="confirmPurchase()">确认购买</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
@@ -226,6 +244,11 @@
                     <p><i class="fas fa-phone"></i> 400-123-4567</p>
                     <p><i class="fas fa-envelope"></i> service@xiaoxue.com</p>
                     <p><i class="fas fa-map-marker-alt"></i> 北京市朝阳区教育大厦</p>
+                    <p style="margin-top: 15px;">
+                        <a href="admin.html" style="color: #3498db; text-decoration: none;">
+                            <i class="fas fa-cog"></i> 管理后台
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="footer-bottom">

@@ -607,6 +607,82 @@ body {
     text-decoration: underline;
 }
 
+/* 确认购买模态框 */
+#checkout-details {
+    margin-bottom: 20px;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.checkout-item:last-child {
+    border-bottom: none;
+}
+
+.checkout-item-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.checkout-item-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.checkout-item-price {
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.checkout-total {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.checkout-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.cancel-btn,
+.confirm-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.confirm-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #218838;
+}
+
 /* 页脚 */
 .footer {
     background-color: #2c3e50;

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 小学课程资料商城</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 登录页面 -->
+    <div id="login-page" class="login-page">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-shield-alt"></i>
+                <h1>管理后台登录</h1>
+                <p>小学课程资料商城管理系统</p>
+            </div>
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-username">
+                        <i class="fas fa-user"></i>
+                        管理员账号
+                    </label>
+                    <input type="text" id="admin-username" name="username" placeholder="请输入管理员账号" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">
+                        <i class="fas fa-lock"></i>
+                        密码
+                    </label>
+                    <input type="password" id="admin-password" name="password" placeholder="请输入密码" required>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        记住我
+                    </label>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    登录
+                </button>
+            </form>
+            <div class="login-footer">
+                <p>默认账号：admin，密码：123456</p>
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回前台
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 管理后台主界面 -->
+    <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap"></i>
+                <span>课程商城管理</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#dashboard" onclick="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#courses" onclick="showSection('courses')">
+                            <i class="fas fa-book"></i>
+                            <span>课程管理</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#orders" onclick="showSection('orders')">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>订单管理</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#users" onclick="showSection('users')">
+                            <i class="fas fa-users"></i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#statistics" onclick="showSection('statistics')">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>数据统计</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" onclick="showSection('settings')">
+                            <i class="fas fa-cog"></i>
+                            <span>系统设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部导航 -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="page-title">仪表盘</h2>
+                </div>
+                <div class="header-right">
+                    <div class="admin-info">
+                        <span>欢迎，管理员</span>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            退出
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 仪表盘 -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>24</h3>
+                                <p>课程总数</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>156</h3>
+                                <p>注册用户</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>89</h3>
+                                <p>今日订单</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-yen-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>¥12,580</h3>
+                                <p>今日收入</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <div class="chart-container">
+                            <h3>销售趋势</h3>
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <p>销售数据图表</p>
+                            </div>
+                        </div>
+                        <div class="recent-orders">
+                            <h3>最近订单</h3>
+                            <div class="orders-list">
+                                <div class="order-item">
+                                    <span class="order-id">#001</span>
+                                    <span class="order-user">张同学</span>
+                                    <span class="order-amount">¥89</span>
+                                    <span class="order-status paid">已支付</span>
+                                </div>
+                                <div class="order-item">
+                                    <span class="order-id">#002</span>
+                                    <span class="order-user">李同学</span>
+                                    <span class="order-amount">¥95</span>
+                                    <span class="order-status pending">待支付</span>
+                                </div>
+                                <div class="order-item">
+                                    <span class="order-id">#003</span>
+                                    <span class="order-user">王同学</span>
+                                    <span class="order-amount">¥75</span>
+                                    <span class="order-status paid">已支付</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 课程管理 -->
+                <section id="courses-section" class="content-section">
+                    <div class="section-header">
+                        <h3>课程管理</h3>
+                        <button class="btn btn-primary" onclick="showAddCourseModal()">
+                            <i class="fas fa-plus"></i>
+                            添加课程
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>课程名称</th>
+                                    <th>年级</th>
+                                    <th>价格</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-table-body">
+                                <!-- 课程数据将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 订单管理 -->
+                <section id="orders-section" class="content-section">
+                    <div class="section-header">
+                        <h3>订单管理</h3>
+                        <div class="filter-controls">
+                            <select id="order-status-filter">
+                                <option value="">全部状态</option>
+                                <option value="pending">待支付</option>
+                                <option value="paid">已支付</option>
+                                <option value="cancelled">已取消</option>
+                            </select>
+                            <input type="date" id="order-date-filter">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>用户</th>
+                                    <th>课程</th>
+                                    <th>金额</th>
+                                    <th>状态</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body">
+                                <!-- 订单数据将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 用户管理 -->
+                <section id="users-section" class="content-section">
+                    <div class="section-header">
+                        <h3>用户管理</h3>
+                        <div class="search-box">
+                            <input type="text" placeholder="搜索用户..." id="user-search">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户名</th>
+                                    <th>手机号</th>
+                                    <th>注册时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- 用户数据将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 数据统计 -->
+                <section id="statistics-section" class="content-section">
+                    <div class="section-header">
+                        <h3>数据统计</h3>
+                        <div class="date-range">
+                            <input type="date" id="stats-start-date">
+                            <span>至</span>
+                            <input type="date" id="stats-end-date">
+                            <button class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="stats-content">
+                        <div class="stats-summary">
+                            <div class="summary-card">
+                                <h4>总销售额</h4>
+                                <p class="amount">¥45,680</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>订单数量</h4>
+                                <p class="count">342</p>
+                            </div>
+                            <div class="summary-card">
+                                <h4>新增用户</h4>
+                                <p class="count">28</p>
+                            </div>
+                        </div>
+                        <div class="charts-grid">
+                            <div class="chart-item">
+                                <h4>课程销售排行</h4>
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <p>饼图显示各课程销售占比</p>
+                                </div>
+                            </div>
+                            <div class="chart-item">
+                                <h4>用户增长趋势</h4>
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-area"></i>
+                                    <p>用户注册增长曲线</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 系统设置 -->
+                <section id="settings-section" class="content-section">
+                    <div class="section-header">
+                        <h3>系统设置</h3>
+                    </div>
+                    <div class="settings-content">
+                        <div class="settings-group">
+                            <h4>网站设置</h4>
+                            <div class="setting-item">
+                                <label>网站名称</label>
+                                <input type="text" value="小学课程资料商城">
+                            </div>
+                            <div class="setting-item">
+                                <label>客服电话</label>
+                                <input type="text" value="400-123-4567">
+                            </div>
+                            <div class="setting-item">
+                                <label>客服邮箱</label>
+                                <input type="email" value="service@xiaoxue.com">
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>支付设置</h4>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    启用微信支付
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    启用支付宝
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-actions">
+                            <button class="btn btn-primary">保存设置</button>
+                            <button class="btn btn-secondary">重置</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- 添加课程模态框 -->
+    <div id="add-course-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加课程</h3>
+                <button class="close-modal" onclick="hideAddCourseModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-course-form" class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>课程名称</label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>年级</label>
+                        <select name="grade" required>
+                            <option value="">选择年级</option>
+                            <option value="1">一年级</option>
+                            <option value="2">二年级</option>
+                            <option value="3">三年级</option>
+                            <option value="4">四年级</option>
+                            <option value="5">五年级</option>
+                            <option value="6">六年级</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>价格</label>
+                        <input type="number" name="price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>图标</label>
+                        <input type="text" name="icon" placeholder="如：📚">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>课程描述</label>
+                    <textarea name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>课程特色（用逗号分隔）</label>
+                    <input type="text" name="features" placeholder="如：视频教学,练习题库,专业指导">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">添加课程</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideAddCourseModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

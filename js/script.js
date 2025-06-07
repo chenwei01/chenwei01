@@ -346,20 +346,51 @@ function checkout() {
         return;
     }
     
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const confirmed = confirm(`确认购买？总金额：¥${total}`);
+    showCheckout();
+}
+
+// 显示确认购买模态框
+function showCheckout() {
+    const checkoutModal = document.getElementById('checkout-modal');
+    const checkoutDetails = document.getElementById('checkout-details');
+    const checkoutTotalAmount = document.getElementById('checkout-total-amount');
     
-    if (confirmed) {
-        // 模拟支付过程
-        showNotification('正在处理支付...', 'info');
-        setTimeout(() => {
-            cart = [];
-            updateCartCount();
-            updateCartDisplay();
-            toggleCart();
-            showNotification('支付成功！感谢您的购买！', 'success');
-        }, 2000);
-    }
+    // 生成购买详情
+    checkoutDetails.innerHTML = cart.map(item => `
+        <div class="checkout-item">
+            <div class="checkout-item-info">
+                <h4>${item.title}</h4>
+                <p>数量: ${item.quantity}</p>
+            </div>
+            <span class="checkout-item-price">¥${item.price}</span>
+        </div>
+    `).join('');
+    
+    // 计算总金额
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    checkoutTotalAmount.textContent = total;
+    
+    checkoutModal.style.display = 'block';
+}
+
+// 隐藏确认购买模态框
+function hideCheckout() {
+    document.getElementById('checkout-modal').style.display = 'none';
+}
+
+// 确认购买
+function confirmPurchase() {
+    // 模拟支付过程
+    hideCheckout();
+    showNotification('正在处理支付...', 'info');
+    
+    setTimeout(() => {
+        cart = [];
+        updateCartCount();
+        updateCartDisplay();
+        toggleCart();
+        showNotification('支付成功！感谢您的购买！', 'success');
+    }, 2000);
 }
 
 // 显示/隐藏登录模态框
@@ -506,12 +537,16 @@ function toggleMobileMenu() {
 window.onclick = function(event) {
     const loginModal = document.getElementById('login-modal');
     const registerModal = document.getElementById('register-modal');
+    const checkoutModal = document.getElementById('checkout-modal');
     
     if (event.target === loginModal) {
         hideLogin();
     }
     if (event.target === registerModal) {
         hideRegister();
+    }
+    if (event.target === checkoutModal) {
+        hideCheckout();
     }
 }
 
